@@ -223,3 +223,25 @@ wget --user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:75.0) Gecko/20100101 Firef
 chmod +x getWorkstation-linux &&
 sudo ./getWorkstation-linux &&
 
+## SSH Key Github
+ssh-keygen -t ed25519 -C "chris@soychristian.com" &&
+eval "$(ssh-agent -s)" &&
+ssh-add ~/.ssh/id_ed25519 &&
+
+## Alacritty
+sudo apt install cmake pkg-config libfreetype6-dev libxkbcommon-dev python3 libfontconfig1-dev libxcb-xfixes0-dev -y &&
+git clone https://github.com/jwilm/alacritty.git &&
+cargo build --release &&
+
+sudo cp target/release/alacritty /usr/local/bin &&
+sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg &&
+sudo desktop-file-install extra/linux/Alacritty.desktop &&
+sudo update-desktop-database &&
+
+## Powerlevel10k
+# https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k
+#git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+#echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc &&
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+# Set ZSH_THEME="powerlevel10k/powerlevel10k" in ~/.zshrc.
+
