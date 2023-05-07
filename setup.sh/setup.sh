@@ -4,6 +4,9 @@ sudo apt-get update && sudo apt-get -y upgrade &&
 
 sudo apt install -y neovim git neofetch curl wget htop &&
 
+## Remove asterisks Mint.
+sudo mv /etc/sudoers.d/0pwfeedback /etc/sudoers.d/0pwfeedback.disabled &&
+
 ## Install ZSH
 sudo apt install -y zsh &&
 sudo chsh -s $(which zsh) &&
@@ -57,6 +60,12 @@ sudo systemctl enable docker.service &&
 sudo systemctl enable containerd.service &&
 sudo systemctl start docker.service &&
 sudo systemctl start containerd.service &&
+
+## Install Docker Compose
+curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url  | grep docker-compose-linux-x86_64 | cut -d '"' -f 4 | wget -qi - &&
+chmod +x docker-compose-linux-x86_64 &&
+sudo mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose &&
+
 
 ## PNPM (problema al reload)
 wget -qO- https://get.pnpm.io/install.sh | sh - &&
