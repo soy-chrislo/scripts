@@ -2,7 +2,7 @@
 
 sudo apt-get update && sudo apt-get -y upgrade &&
 
-sudo apt install -y neovim git neofetch curl wget htop &&
+sudo apt install -y neovim git neofetch curl wget htop filezilla &&
 
 ## Remove asterisks Mint.
 sudo mv /etc/sudoers.d/0pwfeedback /etc/sudoers.d/0pwfeedback.disabled &&
@@ -11,6 +11,7 @@ sudo mv /etc/sudoers.d/0pwfeedback /etc/sudoers.d/0pwfeedback.disabled &&
 sudo apt install -y zsh &&
 sudo chsh -s $(which zsh) &&
 echo "exec zsh" >> ~/.bashrc
+exec zsh &&
 
 # Install Visual Studio Code
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg &&
@@ -254,3 +255,16 @@ sudo update-desktop-database &&
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 # Set ZSH_THEME="powerlevel10k/powerlevel10k" in ~/.zshrc.
 
+## Postman
+wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz &&
+sudo tar -xzf postman.tar.gz -C /opt &&
+sudo ln -s /opt/Postman/Postman /usr/bin/postman &&
+rm postman.tar.gz &&
+sudo touch /usr/share/applications/postman.desktop &&
+sudo echo "[Desktop Entry]" >> /usr/share/applications/postman.desktop &&
+sudo echo "Type=Application" >> /usr/share/applications/postman.desktop &&
+sudo echo "Name=Postman" >> /usr/share/applications/postman.desktop &&
+sudo echo "Icon=/opt/Postman/app/resources/app/assets/icon.png" >> /usr/share/applications/postman.desktop &&
+sudo echo "Exec="/opt/Postman/Postman"" >> /usr/share/applications/postman.desktop &&
+sudo echo "Comment=Postman Desktop App" >> /usr/share/applications/postman.desktop &&
+sudo echo "Categories=Development;Code;" >> /usr/share/applications/postman.desktop &&
