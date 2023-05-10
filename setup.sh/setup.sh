@@ -162,7 +162,10 @@ sudo apt-get update &&
 sudo apt-get upgrade -y &&
 sudo apt-get install gimp -y &&
 
-## Android SDK 
+## Android Studio
+sudo apt-add-repository ppa:maarten-fonville/android-studio &&
+sudo apt-get update &&
+sudo apt install android-studio -y &&
 
 ## MultiMC
 cd &&
@@ -223,6 +226,8 @@ wget https://download.jetbrains.com/idea/ideaIU-2023.1.1.tar.gz &&
 sudo tar -xzf ideaIU-2023.1.1.tar.gz -C /opt &&
 cd /opt/idea-IU-231.8770.65 &&
 bash ./bin/idea.sh &&
+
+## 
 
 
 ## VmWare
