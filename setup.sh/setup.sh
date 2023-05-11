@@ -2,7 +2,7 @@
 
 sudo apt-get update && sudo apt-get -y upgrade &&
 
-sudo apt install -y neovim git neofetch curl wget htop filezilla &&
+sudo apt install -y neovim git neofetch curl wget htop filezilla aptitude &&
 
 ## Remove asterisks Mint.
 sudo mv /etc/sudoers.d/0pwfeedback /etc/sudoers.d/0pwfeedback.disabled &&
@@ -172,6 +172,9 @@ cd &&
 wget https://files.multimc.org/downloads/multimc_1.6-1.deb &&
 sudo apt install -y ./multimc_1.6-1.deb
 
+## UltimMC
+
+
 ## Insomnia
 cd &&
 wget https://github.com/Kong/insomnia/releases/download/core@2023.2.0/Insomnia.Core-2023.2.0.deb &&
@@ -273,3 +276,11 @@ sudo echo "Icon=/opt/Postman/app/resources/app/assets/icon.png" >> /usr/share/ap
 sudo echo "Exec="/opt/Postman/Postman"" >> /usr/share/applications/postman.desktop &&
 sudo echo "Comment=Postman Desktop App" >> /usr/share/applications/postman.desktop &&
 sudo echo "Categories=Development;Code;" >> /usr/share/applications/postman.desktop &&
+
+# Wine
+sudo mkdir -pm755 /etc/apt/keyrings &&
+sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key &&
+sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources &&
+sudo apt update &&
+sudo aptitude install winehq-stable -y &&
+
