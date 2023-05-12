@@ -278,9 +278,16 @@ sudo echo "Comment=Postman Desktop App" >> /usr/share/applications/postman.deskt
 sudo echo "Categories=Development;Code;" >> /usr/share/applications/postman.desktop &&
 
 # Wine
-sudo mkdir -pm755 /etc/apt/keyrings &&
-sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key &&
-sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources &&
-sudo apt update &&
-sudo aptitude install winehq-stable -y &&
+# sudo mkdir -pm755 /etc/apt/keyrings &&
+# sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key &&
+# sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources &&
+# sudo apt update &&
+# sudo aptitude install winehq-stable -y &&
+
+# Obsidian
+wget https://github.com/obsidianmd/obsidian-releases/releases/download/v1.2.8/obsidian_1.2.8_amd64.deb &&
+sudo apt install -y ./obsidian_1.2.8_amd64.deb &&
+rm obsidian_1.2.8_amd64.deb &&
+
+
 
