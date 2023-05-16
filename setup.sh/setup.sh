@@ -1,19 +1,21 @@
 #!/bin/bash
+packages=("neovim" "git" "neofetch" "curl" "wget" "htop" "filezilla" "aptitude" "flameshot" "zsh" "apt-transport-https" "ca-certificates" "curl" "software-properties-common" "openjdk-8-jdk" "openjdk-17-jdk" "gcc" "make" "build-essential" "ffmpeg" "libc++1-14" "gconf2-common" "libgconf-2-4" "libc++1" "linux-headers-generic" "cmake" "pkg-config" "libfreetype6-dev" "libxkbcommon-dev" "python3" "libfontconfig1-dev" "libxcb-xfixes0-dev")
 
 sudo apt-get update && sudo apt-get -y upgrade &&
 
-sudo apt install -y neovim git neofetch curl wget htop filezilla aptitude flameshot &&
+sudo apt install -y "${packages[@]}" &&
 
 ## Remove asterisks Mint.
 sudo mv /etc/sudoers.d/0pwfeedback /etc/sudoers.d/0pwfeedback.disabled &&
 
-
-
 ## Install ZSH (tratar de traer el archivo de configuracion .zshrc ya creado)
-sudo apt install -y zsh &&
+# sudo apt install -y zsh &&
 sudo chsh -s $(which zsh) &&
 echo "exec zsh" >> ~/.bashrc
-exec zsh &&
+# exec zsh &&
+# exec zsh -c "sh setup.sh" &&
+exec "$SHELL" -c "sh setup.sh" &&
+
 
 ## Install Oh My ZSH
 sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" &&
@@ -25,12 +27,13 @@ sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.micr
 sudo apt-get install apt-transport-https && sudo apt-get update &&
 sudo apt-get install code &&
 
-## Install Node using NVM
+## Install Node using NVM  
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash &&
 ### Bash
 # source ~/.bashrc &&
 ### ZSH
-source ~/.zshrc &&
+# source ~/.zshrc &&
+exec "$SHELL" -c "sh setup.sh" &&
 nvm install node &&
 
 ## Install Pyenv
@@ -43,13 +46,14 @@ echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc && 
 echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc &&
 echo 'eval "$(pyenv init -)"' >> ~/.zshrc &&
-exec "$SHELL" &&
+# exec "$SHELL" &&
+exec "$SHELL" -c "sh setup.sh" &&
 pyenv install 3.11.3 &&
 
 
 ## Install Docker
 sudo apt -y update &&
-sudo apt -y install apt-transport-https ca-certificates curl software-properties-common &&
+# sudo apt -y install apt-transport-https ca-certificates curl software-properties-common &&
 # sudo apt -y remove docker docker-engine docker.io containerd runc &&
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg &&
@@ -110,27 +114,28 @@ corepack enable &&
 #phpbrew install php-8.2 +default &&
 
 ## Java JDK
-sudo apt-get update && 
+# sudo apt-get update && 
 # apt-get remove openjdk* &&
-sudo apt-get install openjdk-8-jdk -y &&
-sudo apt-get install openjdk-17-jdk -y &&
+
+# sudo apt-get install openjdk-8-jdk -y &&
+# sudo apt-get install openjdk-17-jdk -y &&
 
 ## Install Rust
-sudo apt install -y curl gcc make build-essential &&
+# sudo apt install -y curl gcc make build-essential &&
 curl https://sh.rustup.rs -sSf | sh &&
 source ~/.profile &&
 source ~/.cargo/env &&
 
 ## Install Go
-sudo apt update && sudo apt install build-essential -y &&
-sudo add-apt-repository ppa:longsleep/golang-backports &&
+# sudo apt update && sudo apt install build-essential -y &&
+# sudo add-apt-repository ppa:longsleep/golang-backports &&
 sudo apt update &&
 sudo apt install golang-go -y &&
 
 ## Install Deno using DVM (Work)
 curl -fsSL https://dvm.deno.dev | sh &&
 ### Bash
-source ~/.bashrc && source ~/.bash_profile &&
+# source ~/.bashrc && source ~/.bash_profile &&
 ### ZSH
 source ~/.zshrc && 
 
@@ -140,18 +145,18 @@ dvm install 1.33.2 &&
 
 
 ## Install Kdenlive
-sudo add-apt-repository ppa:kdenlive/kdenlive-stable &&
+# sudo add-apt-repository ppa:kdenlive/kdenlive-stable &&
 sudo apt-get update &&
 sudo apt-get install kdenlive -y &&
 
 ## Install OBS Studio
-sudo apt install ffmpeg &&
-sudo add-apt-repository ppa:obsproject/obs-studio &&
+# sudo apt install ffmpeg &&
+# sudo add-apt-repository ppa:obsproject/obs-studio &&
 sudo apt update &&
 sudo apt install obs-studio -y &&
 
 ## Install Discord
-sudo apt install libc++1-14 gconf2-common libgconf-2-4 libc++1 && apt --fix-broken install -y &&
+# sudo apt install libc++1-14 gconf2-common libgconf-2-4 libc++1 && apt --fix-broken install -y &&
 wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb" &&
 # wget -O discord “https://discord.com/api/download?platform=linux&format=deb”
 sudo dpkg -i discord.deb &&
@@ -161,14 +166,14 @@ sudo apt-get update &&
 sudo apt-get upgrade -y &&
 
 ## Install GIMP
-sudo add-apt-repository ppa:savoury1/ffmpeg4 -y &&
-sudo add-apt-repository ppa:savoury1/gimp -y &&
+# sudo add-apt-repository ppa:savoury1/ffmpeg4 -y &&
+# sudo add-apt-repository ppa:savoury1/gimp -y &&
 sudo apt-get update &&
 sudo apt-get upgrade -y &&
 sudo apt-get install gimp -y &&
 
 ## Android Studio
-sudo apt-add-repository ppa:maarten-fonville/android-studio &&
+# sudo apt-add-repository ppa:maarten-fonville/android-studio &&
 sudo apt-get update &&
 sudo apt install android-studio -y &&
 
@@ -205,14 +210,16 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && echo "
 # sudo echo "[Install]" >> battery-charge-threshold.service &&
 # sudo echo "WantedBy=multi-user.target" >> battery-charge-threshold.service &&
 
-# sudo systemctl enable battery-charge-threshold.service &&
-# sudo systemctl start battery-charge-threshold.service &&
+sudo mv battery-charge-threshold.service /etc/systemd/system/ &&
+
+sudo systemctl enable battery-charge-threshold.service &&
+sudo systemctl start battery-charge-threshold.service &&
 
 ## Dart
 
 sudo apt-get update &&
 
-sudo apt-get install apt-transport-https &&
+# sudo apt-get install apt-transport-https &&
 
 wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/dart.gpg &&
 
@@ -240,7 +247,7 @@ bash ./bin/idea.sh &&
 
 ## VmWare
 sudo apt update &&
-sudo apt install build-essential gcc wget linux-headers-generic linux-headers-$(uname -r) &&
+sudo apt install linux-headers-$(uname -r) &&
 cd /tmp &&
 wget https://download3.vmware.com/software/WKST-PLAYER-1702/VMware-Player-Full-17.0.2-21581411.x86_64.bundle &&
 chmod +x VMware-Player-Full-17.0.2-21581411.x86_64.bundle &&
@@ -252,7 +259,7 @@ eval "$(ssh-agent -s)" &&
 ssh-add ~/.ssh/id_ed25519 &&
 
 ## Alacritty
-sudo apt install cmake pkg-config libfreetype6-dev libxkbcommon-dev python3 libfontconfig1-dev libxcb-xfixes0-dev -y &&
+# sudo apt install cmake pkg-config libfreetype6-dev libxkbcommon-dev python3 libfontconfig1-dev libxcb-xfixes0-dev -y &&
 git clone https://github.com/jwilm/alacritty.git &&
 cargo build --release &&
 
@@ -273,14 +280,15 @@ wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz &&
 sudo tar -xzf postman.tar.gz -C /opt &&
 sudo ln -s /opt/Postman/Postman /usr/bin/postman &&
 rm postman.tar.gz &&
-sudo touch /usr/share/applications/postman.desktop &&
-sudo echo "[Desktop Entry]" >> /usr/share/applications/postman.desktop &&
-sudo echo "Type=Application" >> /usr/share/applications/postman.desktop &&
-sudo echo "Name=Postman" >> /usr/share/applications/postman.desktop &&
-sudo echo "Icon=/opt/Postman/app/resources/app/assets/icon.png" >> /usr/share/applications/postman.desktop &&
-sudo echo "Exec="/opt/Postman/Postman"" >> /usr/share/applications/postman.desktop &&
-sudo echo "Comment=Postman Desktop App" >> /usr/share/applications/postman.desktop &&
-sudo echo "Categories=Development;Code;" >> /usr/share/applications/postman.desktop &&
+sudo mv postman.desktop /usr/share/applications/ &&
+# sudo touch /usr/share/applications/postman.desktop &&
+# sudo echo "[Desktop Entry]" >> /usr/share/applications/postman.desktop &&
+# sudo echo "Type=Application" >> /usr/share/applications/postman.desktop &&
+# sudo echo "Name=Postman" >> /usr/share/applications/postman.desktop &&
+# sudo echo "Icon=/opt/Postman/app/resources/app/assets/icon.png" >> /usr/share/applications/postman.desktop &&
+# sudo echo "Exec="/opt/Postman/Postman"" >> /usr/share/applications/postman.desktop &&
+# sudo echo "Comment=Postman Desktop App" >> /usr/share/applications/postman.desktop &&
+# sudo echo "Categories=Development;Code;" >> /usr/share/applications/postman.desktop &&
 
 # Wine
 # sudo mkdir -pm755 /etc/apt/keyrings &&
