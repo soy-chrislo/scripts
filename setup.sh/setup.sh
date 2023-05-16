@@ -1,15 +1,24 @@
 #!/bin/bash
 packages=("neovim" "git" "neofetch" "curl" "wget" "htop" "filezilla" "aptitude" "flameshot" "zsh" "apt-transport-https" "ca-certificates" "curl" "software-properties-common" "openjdk-8-jdk" "openjdk-17-jdk" "gcc" "make" "build-essential" "ffmpeg" "libc++1-14" "gconf2-common" "libgconf-2-4" "libc++1" "linux-headers-generic" "cmake" "pkg-config" "libfreetype6-dev" "libxkbcommon-dev" "python3" "libfontconfig1-dev" "libxcb-xfixes0-dev")
+thrid-party-packages=("golang-go" "kdenlive" "obs-studio" "gimp" "android-studio")
 
-sudo apt-get update && sudo apt-get -y upgrade &&
 
 ## Add repositories
 source add-repositories.sh &&
 
+sudo apt-get update && sudo apt-get -y upgrade &&
+
+## Install list packages
 sudo apt install -y "${packages[@]}" &&
+sudo apt install -y "${thrid-party-packages[@]}" &&
 
 ## Remove asterisks Mint.
-sudo mv /etc/sudoers.d/0pwfeedback /etc/sudoers.d/0pwfeedback.disabled &&
+if [ "$DISTRIB_ID" == "LinuxMint" ]; then
+  sudo mv /etc/sudoers.d/0pwfeedback /etc/sudoers.d/0pwfeedback.disabled &&
+else
+  echo "Omitting 0pwfeedback file" &&
+fi
+
 
 ## Install ZSH (tratar de traer el archivo de configuracion .zshrc ya creado)
 # sudo apt install -y zsh &&
@@ -133,7 +142,7 @@ source ~/.cargo/env &&
 # sudo apt update && sudo apt install build-essential -y &&
 # sudo add-apt-repository ppa:longsleep/golang-backports &&
 sudo apt update &&
-sudo apt install golang-go -y &&
+# sudo apt install golang-go -y &&
 
 ## Install Deno using DVM (Work)
 curl -fsSL https://dvm.deno.dev | sh &&
@@ -150,13 +159,13 @@ dvm install 1.33.2 &&
 ## Install Kdenlive
 # sudo add-apt-repository ppa:kdenlive/kdenlive-stable &&
 sudo apt-get update &&
-sudo apt-get install kdenlive -y &&
+# sudo apt-get install kdenlive -y &&
 
 ## Install OBS Studio
 # sudo apt install ffmpeg &&
 # sudo add-apt-repository ppa:obsproject/obs-studio &&
 sudo apt update &&
-sudo apt install obs-studio -y &&
+# sudo apt install obs-studio -y &&
 
 ## Install Discord
 # sudo apt install libc++1-14 gconf2-common libgconf-2-4 libc++1 && apt --fix-broken install -y &&
@@ -173,7 +182,7 @@ sudo apt-get upgrade -y &&
 # sudo add-apt-repository ppa:savoury1/gimp -y &&
 sudo apt-get update &&
 sudo apt-get upgrade -y &&
-sudo apt-get install gimp -y &&
+# sudo apt-get install gimp -y &&
 
 ## Android Studio
 # sudo apt-add-repository ppa:maarten-fonville/android-studio &&
