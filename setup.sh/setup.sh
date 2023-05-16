@@ -3,6 +3,9 @@ packages=("neovim" "git" "neofetch" "curl" "wget" "htop" "filezilla" "aptitude" 
 
 sudo apt-get update && sudo apt-get -y upgrade &&
 
+## Add repositories
+source add-repositories.sh &&
+
 sudo apt install -y "${packages[@]}" &&
 
 ## Remove asterisks Mint.
