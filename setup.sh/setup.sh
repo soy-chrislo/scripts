@@ -7,11 +7,16 @@ sudo apt install -y neovim git neofetch curl wget htop filezilla aptitude flames
 ## Remove asterisks Mint.
 sudo mv /etc/sudoers.d/0pwfeedback /etc/sudoers.d/0pwfeedback.disabled &&
 
-## Install ZSH
+
+
+## Install ZSH (tratar de traer el archivo de configuracion .zshrc ya creado)
 sudo apt install -y zsh &&
 sudo chsh -s $(which zsh) &&
 echo "exec zsh" >> ~/.bashrc
 exec zsh &&
+
+## Install Oh My ZSH
+sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" &&
 
 # Install Visual Studio Code
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg &&
@@ -237,9 +242,9 @@ bash ./bin/idea.sh &&
 sudo apt update &&
 sudo apt install build-essential gcc wget linux-headers-generic linux-headers-$(uname -r) &&
 cd /tmp &&
-wget --user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:75.0) Gecko/20100101 Firefox/75.0" https://www.vmware.com/go/getWorkstation-linux &&
-chmod +x getWorkstation-linux &&
-sudo ./getWorkstation-linux &&
+wget https://download3.vmware.com/software/WKST-PLAYER-1702/VMware-Player-Full-17.0.2-21581411.x86_64.bundle &&
+chmod +x VMware-Player-Full-17.0.2-21581411.x86_64.bundle &&
+sudo ./VMware-Player-Full-17.0.2-21581411.x86_64.bundle &&
 
 ## SSH Key Github
 ssh-keygen -t ed25519 -C "chris@soychristian.com" &&
