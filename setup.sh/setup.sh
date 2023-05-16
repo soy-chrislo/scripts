@@ -2,7 +2,7 @@
 
 sudo apt-get update && sudo apt-get -y upgrade &&
 
-sudo apt install -y neovim git neofetch curl wget htop filezilla aptitude &&
+sudo apt install -y neovim git neofetch curl wget htop filezilla aptitude flameshot &&
 
 ## Remove asterisks Mint.
 sudo mv /etc/sudoers.d/0pwfeedback /etc/sudoers.d/0pwfeedback.disabled &&
@@ -288,6 +288,22 @@ sudo echo "Categories=Development;Code;" >> /usr/share/applications/postman.desk
 wget https://github.com/obsidianmd/obsidian-releases/releases/download/v1.2.8/obsidian_1.2.8_amd64.deb &&
 sudo apt install -y ./obsidian_1.2.8_amd64.deb &&
 rm obsidian_1.2.8_amd64.deb &&
+
+# Mega
+wget https://mega.nz/linux/repo/xUbuntu_22.04/amd64/megasync-xUbuntu_22.04_amd64.deb &&
+sudo apt install -y ./megasync-xUbuntu_22.04_amd64.deb &&
+rm megasync-xUbuntu_22.04_amd64.deb &&
+
+# .NET
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb &&
+sudo dpkg -i packages-microsoft-prod.deb &&
+rm packages-microsoft-prod.deb &&
+
+sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-7.0 &&
+
+sudo apt-get update && \
+  sudo apt-get install -y aspnetcore-runtime-7.0 &&
 
 
 
