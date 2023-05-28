@@ -4,14 +4,24 @@ third_party_packages=("golang-go" "kdenlive" "obs-studio" "gimp" "android-studio
 
 
 ## Add repositories
+echo "---------------------- Add repositories ----------------------" &&
 source add-repositories.sh &&
+echo "---------------------- Add keys ----------------------" &&
 source add-keys.sh &&
 
+echo "---------------------- Update and upgrade ----------------------" &&
 sudo apt-get update && sudo apt-get -y upgrade &&
 
-## Install list packages
+## Install list packages\
+sudo rm /var/lib/apt/lists/lock
+sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock
+
+echo "---------------------- Install list packages ----------------------" &&
+
 sudo apt install -y "${packages[@]}" &&
 
+echo "---------------------- Install third party packages ----------------------" &&
 
 sudo apt install -y "${third_party_packages[@]}" &&
 
@@ -29,6 +39,8 @@ sudo apt install -y "${third_party_packages[@]}" &&
 # sudo apt-get install code &&
 
 ## Install Node using NVM  
+echo "---------------------- Install Node using NVM ----------------------" &&
+
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash &&
 ### Bash
 # source ~/.bashrc &&
@@ -37,6 +49,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash 
 # nvm install node &&
 
 ## Install Pyenv
+echo "---------------------- Install Pyenv ----------------------" &&
 curl https://pyenv.run | bash &&
 ### Bash
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
@@ -61,6 +74,8 @@ echo 'eval "$(pyenv init -)"' >> ~/.zshrc &&
 # sudo apt -y update &&
 # sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin &&
 
+echo "---------------------- Install Docker ----------------------" &&
+
 sudo groupadd docker &&
 sudo usermod -aG docker $USER &&
 newgrp docker &&
@@ -71,12 +86,14 @@ sudo systemctl start docker.service &&
 sudo systemctl start containerd.service &&
 
 ## Install Docker Compose
+echo "---------------------- Install Docker Compose ----------------------" &&
 curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url  | grep docker-compose-linux-x86_64 | cut -d '"' -f 4 | wget -qi - &&
 chmod +x docker-compose-linux-x86_64 &&
 sudo mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose &&
 
 
 ## PNPM (problema al reload)
+echo "---------------------- Install PNPM ----------------------" &&
 wget -qO- https://get.pnpm.io/install.sh | sh - &&
 ### Bash
 # source ~/.bashrc &&
@@ -121,6 +138,7 @@ wget -qO- https://get.pnpm.io/install.sh | sh - &&
 
 ## Install Rust
 # sudo apt install -y curl gcc make build-essential &&
+echo "---------------------- Install Rust ----------------------" &&
 curl https://sh.rustup.rs -sSf | sh &&
 source ~/.profile &&
 source ~/.cargo/env &&
@@ -132,6 +150,7 @@ source ~/.cargo/env &&
 # sudo apt install golang-go -y &&
 
 ## Install Deno using DVM (Work)
+echo "---------------------- Install Deno using DVM ----------------------" &&
 curl -fsSL https://dvm.deno.dev | sh &&
 ### Bash
 # source ~/.bashrc && source ~/.bash_profile &&
@@ -156,6 +175,7 @@ curl -fsSL https://dvm.deno.dev | sh &&
 
 ## Install Discord
 # sudo apt install libc++1-14 gconf2-common libgconf-2-4 libc++1 && apt --fix-broken install -y &&
+echo "---------------------- Install Discord ----------------------" &&
 wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb" &&
 # wget -O discord “https://discord.com/api/download?platform=linux&format=deb”
 sudo dpkg -i discord.deb &&
@@ -176,6 +196,7 @@ rm discord.deb &&
 # sudo apt install android-studio -y &&
 
 ## MultiMC
+echo "---------------------- Install MultiMC ----------------------" &&
 cd &&
 wget https://files.multimc.org/downloads/multimc_1.6-1.deb &&
 sudo apt install -y ./multimc_1.6-1.deb
@@ -184,6 +205,7 @@ sudo apt install -y ./multimc_1.6-1.deb
 
 
 ## Insomnia
+echo "---------------------- Install Insomnia ----------------------" &&
 cd &&
 wget https://github.com/Kong/insomnia/releases/download/core@2023.2.0/Insomnia.Core-2023.2.0.deb &&
 sudo apt install -y ./Insomnia.Core-2023.2.0.deb &&
@@ -194,6 +216,7 @@ sudo apt install -y ./Insomnia.Core-2023.2.0.deb &&
 # sudo apt-get -y update && sudo apt-get install -y yarn && yarn
 
 ## Battery Treshold Asus
+echo "---------------------- Install Battery Treshold Asus ----------------------" &&
 sudo mv battery-charge-threshold.service /etc/systemd/system/ &&
 
 sudo systemctl enable battery-charge-threshold.service &&
@@ -220,6 +243,7 @@ sudo systemctl start battery-charge-threshold.service &&
 # sudo apt install -y google-chrome-stable &&
 
 ## Intellij Idea Ultimate
+echo "---------------------- Install Intellij Idea Ultimate ----------------------" &&
 cd &&
 wget https://download.jetbrains.com/idea/ideaIU-2023.1.1.tar.gz &&
 sudo tar -xzf ideaIU-2023.1.1.tar.gz -C /opt &&
@@ -238,11 +262,13 @@ bash ./bin/idea.sh &&
 # sudo ./VMware-Player-Full-17.0.2-21581411.x86_64.bundle &&
 
 ## SSH Key Github
+echo "---------------------- Install SSH Key Github ----------------------" &&
 ssh-keygen -t ed25519 -C "chris@soychristian.com" &&
 eval "$(ssh-agent -s)" &&
 ssh-add ~/.ssh/id_ed25519 &&
 
 ## Alacritty
+echo "---------------------- Install Alacritty ----------------------" &&
 # sudo apt install cmake pkg-config libfreetype6-dev libxkbcommon-dev python3 libfontconfig1-dev libxcb-xfixes0-dev -y &&
 git clone https://github.com/jwilm/alacritty.git &&
 cargo build --release &&
@@ -255,6 +281,7 @@ sudo update-desktop-database &&
 
 
 ## Postman
+echo "---------------------- Install Postman ----------------------" &&
 wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz &&
 sudo tar -xzf postman.tar.gz -C /opt &&
 sudo ln -s /opt/Postman/Postman /usr/bin/postman &&
@@ -277,16 +304,19 @@ sudo mv postman.desktop /usr/share/applications/ &&
 # sudo aptitude install winehq-stable -y &&
 
 # Obsidian
+echo "---------------------- Install Obsidian ----------------------" &&
 wget https://github.com/obsidianmd/obsidian-releases/releases/download/v1.2.8/obsidian_1.2.8_amd64.deb &&
 sudo apt install -y ./obsidian_1.2.8_amd64.deb &&
 rm obsidian_1.2.8_amd64.deb &&
 
 # Mega
+echo "---------------------- Install Mega ----------------------" &&
 wget https://mega.nz/linux/repo/xUbuntu_22.04/amd64/megasync-xUbuntu_22.04_amd64.deb &&
 sudo apt install -y ./megasync-xUbuntu_22.04_amd64.deb &&
 rm megasync-xUbuntu_22.04_amd64.deb &&
 
 # .NET
+echo "---------------------- Install .NET ----------------------" &&
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb &&
 sudo dpkg -i packages-microsoft-prod.deb &&
 rm packages-microsoft-prod.deb &&
@@ -305,14 +335,17 @@ sudo rm /var/lib/dpkg/lock
 
 ## Install ZSH (tratar de traer el archivo de configuracion .zshrc ya creado)
 # sudo apt install -y zsh &&
+echo "---------------------- Install ZSH ----------------------" &&
 sudo chsh -s $(which zsh) &&
 echo "exec zsh" >> ~/.bashrc
 # exec zsh &&
 
 ## Install Oh My ZSH
+echo "---------------------- Install Oh My ZSH ----------------------" &&
 sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" &&
 
 ## Powerlevel10k
+echo "---------------------- Install Powerlevel10k ----------------------" &&
 # https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k
 #git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 #echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc &&
