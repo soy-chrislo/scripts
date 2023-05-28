@@ -1,9 +1,9 @@
-sudo add-apt-repository ppa:longsleep/golang-backports -y &&
-sudo add-apt-repository ppa:kdenlive/kdenlive-stable -y &&
-sudo add-apt-repository ppa:obsproject/obs-studio -y &&
-sudo add-apt-repository ppa:savoury1/ffmpeg4 -y &&
-sudo add-apt-repository ppa:savoury1/gimp -y &&
-sudo add-apt-repository ppa:maarten-fonville/android-studio -y &&
+sudo add-apt-repository ppa:longsleep/golang-backports -y && sleep 1 &&
+sudo add-apt-repository ppa:kdenlive/kdenlive-stable -y && sleep 1 &&
+sudo add-apt-repository ppa:obsproject/obs-studio -y && sleep 1 &&
+sudo add-apt-repository ppa:savoury1/ffmpeg4 -y && sleep 1 &&
+sudo add-apt-repository ppa:savoury1/gimp -y && sleep 1 &&
+sudo add-apt-repository ppa:maarten-fonville/android-studio -y && sleep 1 &&
 echo 'deb [signed-by=/usr/share/keyrings/dart.gpg arch=amd64] https://storage.googleapis.com/download.dartlang.org/linux/debian stable main' | sudo tee /etc/apt/sources.list.d/dart_stable.list -y &&
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list -y &&
 sudo add-apt-repository "deb http://dl.google.com/linux/chrome/deb/ stable main" &&
