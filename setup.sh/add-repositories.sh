@@ -10,7 +10,8 @@ sudo add-apt-repository ppa:savoury1/gimp -y && sleep 5 &&
 echo "------------------- android-studio repository -------------------"
 sudo add-apt-repository ppa:maarten-fonville/android-studio -y && sleep 5 &&
 echo "------------------- dart repository -------------------"
-echo 'deb [signed-by=/usr/share/keyrings/dart.gpg arch=amd64] https://storage.googleapis.com/download.dartlang.org/linux/debian stable main' | sudo tee /etc/apt/sources.list.d/dart_stable.list -y && sleep 5 &&
+echo 'deb [signed-by=/usr/share/keyrings/dart.gpg arch=amd64] https://storage.googleapis.com/download.dartlang.org/linux/debian stable main' | sudo tee /etc/apt/sources.list.d/dart_stable.list && sleep 5 &&
+echo "deb [signed-by=/usr/share/keyrings/dart.gpg arch=amd64] https://storage.googleapis.com/download.dartlang.org/linux/debian stable main" > /etc/apt/sources.list.d/dart_stable.list && sleep 5 &&
 echo "------------------- yarn repository -------------------"
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list -y && sleep 5 &&
 echo "------------------- chrome repository -------------------"

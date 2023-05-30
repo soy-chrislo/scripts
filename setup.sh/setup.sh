@@ -4,10 +4,11 @@ third_party_packages=("golang-go" "kdenlive" "obs-studio" "gimp" "android-studio
 
 
 ## Add repositories
-echo "---------------------- Add repositories ----------------------" &&
-source add-repositories.sh &&
 echo "---------------------- Add keys ----------------------" &&
 source add-keys.sh &&
+echo "---------------------- Add repositories ----------------------" &&
+source add-repositories.sh &&
+
 
 echo "---------------------- Update and upgrade ----------------------" &&
 sudo apt-get update && sudo apt-get -y upgrade &&
@@ -250,17 +251,6 @@ sudo tar -xzf ideaIU-2023.1.1.tar.gz -C /opt &&
 cd /opt/idea-IU-231.8770.65 &&
 bash ./bin/idea.sh &&
 
-## 
-
-
-## VmWare
-# sudo apt update &&
-# sudo apt install linux-headers-$(uname -r) &&
-# cd /tmp &&
-# wget https://download3.vmware.com/software/WKST-PLAYER-1702/VMware-Player-Full-17.0.2-21581411.x86_64.bundle &&
-# chmod +x VMware-Player-Full-17.0.2-21581411.x86_64.bundle &&
-# sudo ./VMware-Player-Full-17.0.2-21581411.x86_64.bundle &&
-
 ## SSH Key Github
 echo "---------------------- Install SSH Key Github ----------------------" &&
 ssh-keygen -t ed25519 -C "chris@soychristian.com" &&
@@ -287,21 +277,6 @@ sudo tar -xzf postman.tar.gz -C /opt &&
 sudo ln -s /opt/Postman/Postman /usr/bin/postman &&
 rm postman.tar.gz &&
 sudo mv postman.desktop /usr/share/applications/ &&
-# sudo touch /usr/share/applications/postman.desktop &&
-# sudo echo "[Desktop Entry]" >> /usr/share/applications/postman.desktop &&
-# sudo echo "Type=Application" >> /usr/share/applications/postman.desktop &&
-# sudo echo "Name=Postman" >> /usr/share/applications/postman.desktop &&
-# sudo echo "Icon=/opt/Postman/app/resources/app/assets/icon.png" >> /usr/share/applications/postman.desktop &&
-# sudo echo "Exec="/opt/Postman/Postman"" >> /usr/share/applications/postman.desktop &&
-# sudo echo "Comment=Postman Desktop App" >> /usr/share/applications/postman.desktop &&
-# sudo echo "Categories=Development;Code;" >> /usr/share/applications/postman.desktop &&
-
-# Wine
-# sudo mkdir -pm755 /etc/apt/keyrings &&
-# sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key &&
-# sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources &&
-# sudo apt update &&
-# sudo aptitude install winehq-stable -y &&
 
 # Obsidian
 echo "---------------------- Install Obsidian ----------------------" &&
@@ -329,9 +304,9 @@ rm packages-microsoft-prod.deb &&
 
 
 # Gnome Boxes
-sudo rm /var/lib/apt/lists/lock
-sudo rm /var/cache/apt/archives/lock
-sudo rm /var/lib/dpkg/lock
+sudo rm /var/lib/apt/lists/lock &&
+sudo rm /var/cache/apt/archives/lock &&
+sudo rm /var/lib/dpkg/lock &&
 
 ## Install ZSH (tratar de traer el archivo de configuracion .zshrc ya creado)
 # sudo apt install -y zsh &&
@@ -352,3 +327,4 @@ echo "---------------------- Install Powerlevel10k ----------------------" &&
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 # Set ZSH_THEME="powerlevel10k/powerlevel10k" in ~/.zshrc.
 
+sudo mv .zshrc ~/.zshrc 
